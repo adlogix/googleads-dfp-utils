@@ -24,9 +24,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:https://github.com/adlogix/googleads-dfp-utils.git</connection>
-        <developerConnection>scm:git:https://github.com/adlogix/googleads-dfp-utils.git</developerConnection>
-        <url>https://github.com/adlogix/googleads-dfp-utils.git</url>
+        <connection>scm:git:git@github.com:adlogix/googleads-dfp-utils.git</connection>
+        <developerConnection>scm:git:git@github.com:adlogix/googleads-dfp-utils.git</developerConnection>
+        <url>git@github.com:adlogix/googleads-dfp-utils.git</url>
     </scm>
 
     <developers>
@@ -80,6 +80,32 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>sonatype</id>
+            <properties>
+                <sonatypeReleaseId>sonatype-nexus-staging</sonatypeReleaseId>
+                <sonatypeReleaseUrl>
+                    https://oss.sonatype.org/service/local/staging/deploy/maven2
+                </sonatypeReleaseUrl>
+                <sonatypeSnapshotId>sonatype-nexus-snapshots</sonatypeSnapshotId>
+                <sonatypeSnapshotUrl>
+                    https://oss.sonatype.org/content/repositories/snapshots/
+                </sonatypeSnapshotUrl>
+            </properties>
+            <distributionManagement>
+                <repository>
+                    <id>${sonatypeReleaseId}</id>
+                    <url>${sonatypeReleaseUrl}</url>
+                </repository>
+                <snapshotRepository>
+                    <id>${sonatypeSnapshotId}</id>
+                    <url>${sonatypeSnapshotUrl}</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+    </profiles>
 
     <dependencies>
         <dependency>
