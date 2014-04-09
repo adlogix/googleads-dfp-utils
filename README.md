@@ -13,7 +13,7 @@ You can use Maven by including the library:
 
 ```xml
 <dependency>
-    <groupId>eu.adlogix.dfp.utils</groupId>
+    <groupId>eu.adlogix.com.google.api.ads.dfp</groupId>
     <artifactId>dfp-utils</artifactId>
     <version>0.0.1</version>
 </dependency>
