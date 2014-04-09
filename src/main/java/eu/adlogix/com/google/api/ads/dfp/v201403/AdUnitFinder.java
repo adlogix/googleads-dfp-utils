@@ -65,6 +65,8 @@ public class AdUnitFinder {
 
 	public List<AdUnit> findByStatementBuilder(StatementBuilder statementBuilder) {
 
+		statementBuilder.limit(StatementBuilder.SUGGESTED_PAGE_LIMIT);
+
 		int totalResultSetSize = 0;
 
 		List<AdUnit> adUnits = new ArrayList<AdUnit>();
