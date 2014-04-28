@@ -7,14 +7,12 @@ Google Ads Dfp Utils is a set of utility classes which allows on top of the goog
 
 ### With Maven
 
-> Currently it's not yet on the central repo !!
-
 You can use Maven by including the library:
 
 ```xml
 <dependency>
     <groupId>eu.adlogix.com.google.api.ads.dfp</groupId>
-    <artifactId>dfp-utils</artifactId>
+    <artifactId>googleads-dfp-utils</artifactId>
     <version>0.0.1</version>
 </dependency>
 ```
