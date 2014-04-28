@@ -6,6 +6,11 @@ import com.google.api.ads.dfp.axis.utils.v201403.DateTimes;
 
 public class AdUnitStatementBuilderCreator extends BaseStatementBuilderCreator {
 
+	public AdUnitStatementBuilderCreator withId(String id, StatementCondition condition) {
+		where(AdUnitStatementQueryFilter.ID, new StatementQueryValue(id, condition));
+		return this;
+	}
+
 	public AdUnitStatementBuilderCreator withParentId(String parentId, StatementCondition condition) {
 		where(AdUnitStatementQueryFilter.PARENT_ID, new StatementQueryValue(parentId, condition));
 		return this;

@@ -30,6 +30,10 @@ public class AdUnitFinder {
 				.withStatusActive()));
 	}
 
+	public AdUnit findById(String id) {
+		return Iterables.getOnlyElement(findByAdUnitStatementBuilder(new AdUnitStatementBuilderCreator().withId(id, StatementCondition.EQUAL)));
+	}
+
 	public List<AdUnit> findAllByParentId(String parentId) {
 		return findAllByParentId(parentId, null);
 	}

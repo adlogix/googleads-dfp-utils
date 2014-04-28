@@ -2,7 +2,7 @@ package eu.adlogix.com.google.api.ads.dfp.v201403;
 
 public enum AdUnitStatementQueryFilter implements StatementQueryFilter {
 
-	PARENT_ID("parentId"), STATUS("status"), LAST_MODIFIED_DATE_TIME("lastModifiedDateTime");
+	ID("id"), PARENT_ID("parentId"), STATUS("status"), LAST_MODIFIED_DATE_TIME("lastModifiedDateTime");
 
 	private final String id;
 
