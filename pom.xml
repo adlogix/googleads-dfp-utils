@@ -116,7 +116,7 @@
                 <sonatypeReleaseUrl>
                     https://oss.sonatype.org/service/local/staging/deploy/maven2
                 </sonatypeReleaseUrl>
-                <sonatypeSnapshotId>sonatype-nexus-snapshots</sonatypeSnapshotId>
+                <sonatypeSnapshotId>sonatype-nexus-staging</sonatypeSnapshotId>
                 <sonatypeSnapshotUrl>
                     https://oss.sonatype.org/content/repositories/snapshots/
                 </sonatypeSnapshotUrl>
