@@ -49,8 +49,44 @@ StatementBuilder statementBuilder = new AdUnitStatementBuilderCreator()
 List<AdUnit> adUnits = adUnitFinder.findByStatementBuilder(statementBuilder);
 ```
 
+### Find LineItems
 
+```java
+// Get the LineItemService.
+LineItemServiceInterface lineItemService =
+    dfpServices.get(session, LineItemServiceInterface.class);
 
+LineItemFinder lineItemFinder = new LineItemFinder(lineItemService);
 
+// Find one LineItem
+LineItem lineItem = lineItemFinder.findById(123456l);
 
+// Custom
+StatementBuilder statementBuilder = new LineItemStatementBuilderCreator()
+                .withId(123456l, StatementCondition.EQUAL)
+                .withLastModifiedDateTime(new DateTime(), StatementCondition.GREATER_OR_EQUAL)
+                .toStatementBuilder();
 
+List<LineItem> lineItems = lineItemFinder.findByStatementBuilder(statementBuilder);
+```
+
+### Find Orders
+
+```java
+// Get the OrderService
+OrderServiceInterface orderService =
+    dfpServices.get(session, OrderServiceInterface.class);
+
+OrderFinder orderFinder = new OrderFinder(orderService);
+
+// Find one LineItem
+Order order = orderFinder.findById(123456l);
+
+// Custom
+StatementBuilder statementBuilder = new OrderStatementBuilderCreator()
+                .withId(123456l, StatementCondition.EQUAL)
+                .withLastModifiedDateTime(new DateTime(), StatementCondition.GREATER_OR_EQUAL)
+                .toStatementBuilder();
+
+List<Order> orders = orderFinder.findByStatementBuilder(statementBuilder);
+```
