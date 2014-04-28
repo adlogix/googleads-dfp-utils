@@ -31,6 +31,9 @@ AdUnitFinder adUnitFinder = new AdUnitFinder(inventoryService);
 // Find the Root AdUnit
 AdUnit rootAdUnit = adUnitFinder.findRoot();
 
+// Find one AdUnit
+AdUnit adUnit = adUnitFinder.findById("123456");
+
 // Find all AdUnits by parentId
 List<AdUnit> adUnits = adUnitFinder.findAllByParentId("123456");
 
