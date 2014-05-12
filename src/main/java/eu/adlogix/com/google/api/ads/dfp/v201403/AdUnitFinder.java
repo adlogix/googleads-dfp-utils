@@ -34,6 +34,10 @@ public class AdUnitFinder {
 		return Iterables.getOnlyElement(findByAdUnitStatementBuilder(new AdUnitStatementBuilderCreator().withId(id, StatementCondition.EQUAL)));
 	}
 
+	public List<AdUnit> findByIds(List<String> ids) {
+		return findByAdUnitStatementBuilder(new AdUnitStatementBuilderCreator().withIds(ids));
+	}
+
 	public List<AdUnit> findAllByParentId(String parentId) {
 		return findAllByParentId(parentId, null);
 	}

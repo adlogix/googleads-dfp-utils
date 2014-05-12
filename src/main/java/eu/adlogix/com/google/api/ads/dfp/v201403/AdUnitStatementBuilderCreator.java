@@ -1,5 +1,7 @@
 package eu.adlogix.com.google.api.ads.dfp.v201403;
 
+import java.util.List;
+
 import org.joda.time.DateTime;
 
 import com.google.api.ads.dfp.axis.utils.v201403.DateTimes;
@@ -8,6 +10,11 @@ public class AdUnitStatementBuilderCreator extends BaseStatementBuilderCreator {
 
 	public AdUnitStatementBuilderCreator withId(String id, StatementCondition condition) {
 		where(AdUnitStatementQueryFilter.ID, new StatementQueryValue(id, condition));
+		return this;
+	}
+
+	public AdUnitStatementBuilderCreator withIds(List<String> ids) {
+		where(AdUnitStatementQueryFilter.ID, new StatementQueryValue(ids, StatementCondition.IN));
 		return this;
 	}
 

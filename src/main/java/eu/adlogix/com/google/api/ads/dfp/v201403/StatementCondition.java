@@ -4,7 +4,7 @@ import lombok.Getter;
 
 public enum StatementCondition {
 
-	LESS("<"), LESS_OR_EQUAL("<="), GREATER(">"), GREATER_OR_EQUAL(">="), EQUAL("="), NOT_EQUAL("!=");
+	LESS("<"), LESS_OR_EQUAL("<="), GREATER(">"), GREATER_OR_EQUAL(">="), EQUAL("="), NOT_EQUAL("!="), IN("IN");
 
 	@Getter
 	private String operator;

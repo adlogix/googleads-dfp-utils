@@ -34,6 +34,9 @@ AdUnit rootAdUnit = adUnitFinder.findRoot();
 // Find one AdUnit
 AdUnit adUnit = adUnitFinder.findById("123456");
 
+// Find AdUnits for a given list
+List<AdUnit> adUnits = adUnitFinder.findByIds(Arrays.asList(new String[] { "111", "222" }));
+
 // Find all AdUnits by parentId
 List<AdUnit> adUnits = adUnitFinder.findAllByParentId("123456");
 
@@ -79,7 +82,7 @@ OrderServiceInterface orderService =
 
 OrderFinder orderFinder = new OrderFinder(orderService);
 
-// Find one LineItem
+// Find one Order
 Order order = orderFinder.findById(123456l);
 
 // Custom
@@ -89,4 +92,25 @@ StatementBuilder statementBuilder = new OrderStatementBuilderCreator()
                 .toStatementBuilder();
 
 List<Order> orders = orderFinder.findByStatementBuilder(statementBuilder);
+```
+
+### Find Placements
+
+```java
+// Get the PlacementService
+PlacementServiceInterface placementService =
+    dfpServices.get(session, PlacementServiceInterface.class);
+
+PlacementFinder placementFinder = new PlacementFinder(placementService);
+
+// Find one Placement
+Placement placement = placementFinder.findById(123456l);
+
+// Custom
+StatementBuilder statementBuilder = new OrderStatementBuilderCreator()
+                .withId(123456l, StatementCondition.EQUAL)
+                .withLastModifiedDateTime(new DateTime(), StatementCondition.GREATER_OR_EQUAL)
+                .toStatementBuilder();
+
+List<Placement> placements = placementFinder.findByStatementBuilder(statementBuilder);
 ```

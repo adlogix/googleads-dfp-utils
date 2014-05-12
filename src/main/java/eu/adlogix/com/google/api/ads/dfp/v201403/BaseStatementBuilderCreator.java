@@ -2,6 +2,8 @@ package eu.adlogix.com.google.api.ads.dfp.v201403;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +27,7 @@ public abstract class BaseStatementBuilderCreator {
 		List<String> queryConditions = Lists.newArrayList();
 
 		for (Map.Entry<StatementQueryFilter, StatementQueryValue> entry : where.entrySet()) {
-			if (entry.getValue().getObject() != null) {
+			if (entry.getValue().getObject() != null && !(entry.getValue().getObject() instanceof Collection<?>)) {
 				statementBuilder.withBindVariableValue(entry.getKey().getId(), entry.getValue().getObject());
 			}
 			queryConditions.add(buildWhereConditionEntry(entry));
@@ -44,7 +46,32 @@ public abstract class BaseStatementBuilderCreator {
 			return filterId + " IS NULL";
 		}
 
+		if (filterObject instanceof List<?>) {
+			return filterId + " IN (" + listToQuery((List<?>) filterObject) + ")";
+		}
+
 		return filterId + " " + filterConditionOperator + " :" + filterId;
+	}
+
+	private String listToQuery(List<?> filterObjects) {
+
+		StringBuilder queryBuilder = new StringBuilder();
+
+		Iterator<?> iterator = filterObjects.iterator();
+
+		while (iterator.hasNext()) {
+
+			Object filterObject = iterator.next();
+
+			queryBuilder.append(filterObject);
+
+			if (iterator.hasNext()) {
+				queryBuilder.append(",");
+			}
+
+		}
+
+		return queryBuilder.toString();
 	}
 
 	public final StatementBuilder toStatementBuilder() {
