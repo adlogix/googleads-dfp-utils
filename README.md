@@ -1,6 +1,8 @@
 Google Ads Dfp Utils
 ====================
 
+[![Build Status](https://travis-ci.org/adlogix/googleads-dfp-utils.png?branch=master)](https://travis-ci.org/adlogix/googleads-dfp-utils)
+
 Google Ads Dfp Utils is a set of utility classes which allows on top of the googleads-java-lib to retrieve very easily information from DFP
 
 ## Installing
