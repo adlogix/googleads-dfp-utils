@@ -8,11 +8,13 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
+import com.google.api.ads.dfp.axis.factory.DfpServices;
 import com.google.api.ads.dfp.axis.utils.v201403.StatementBuilder;
 import com.google.api.ads.dfp.axis.v201403.ApiException;
 import com.google.api.ads.dfp.axis.v201403.Order;
 import com.google.api.ads.dfp.axis.v201403.OrderPage;
 import com.google.api.ads.dfp.axis.v201403.OrderServiceInterface;
+import com.google.api.ads.dfp.lib.client.DfpSession;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -20,6 +22,23 @@ public class OrderFinder {
 
 	private final OrderServiceInterface orderService;
 
+	/**
+	 * Allows to construct the {@link OrderFinder} with {@link DfpServices} and
+	 * {@link DfpSession} which will extract the necessary services to use in
+	 * this class.
+	 * 
+	 * @param dfpServices
+	 * @param session
+	 */
+	public OrderFinder(final DfpServices dfpServices, final DfpSession session) {
+		this(dfpServices.get(session, OrderServiceInterface.class));
+	}
+
+	/**
+	 * Constructs the {@link OrderFinder}
+	 * 
+	 * @param orderService
+	 */
 	public OrderFinder(final OrderServiceInterface orderService) {
 		checkNotNull(orderService);
 		this.orderService = orderService;

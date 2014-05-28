@@ -24,13 +24,20 @@ You can use Maven by including the library:
 ### Find AdUnits
 
 ```java
-// Get the InventoryService.
+
+// Initialization of the Finder class if you cached the services
 InventoryServiceInterface inventoryService =
     dfpServices.get(session, InventoryServiceInterface.class);
+    
+NetworkServiceInterface networkService =
+	dfpServices.get(session, NetworkServiceInterface.class)
 
-AdUnitFinder adUnitFinder = new AdUnitFinder(inventoryService);
+AdUnitFinder adUnitFinder = new AdUnitFinder(inventoryService, networkService);
 
-// Find the Root AdUnit
+// Initialization of the Finder class with the utility service class of DFP
+AdUnitFinder adUnitFinder = new AdUnitFinder(dfpServices, dfpSession);
+
+// Find the Effective Root AdUnit
 AdUnit rootAdUnit = adUnitFinder.findRoot();
 
 // Find one AdUnit
@@ -57,11 +64,14 @@ List<AdUnit> adUnits = adUnitFinder.findByStatementBuilder(statementBuilder);
 ### Find LineItems
 
 ```java
-// Get the LineItemService.
+// Initialization of the Finder class if you cached the services
 LineItemServiceInterface lineItemService =
     dfpServices.get(session, LineItemServiceInterface.class);
 
 LineItemFinder lineItemFinder = new LineItemFinder(lineItemService);
+
+// Initialization of the Finder class with the utility service class of DFP
+LineItemFinder lineItemFinder = new LineItemFinder(dfpServices, dfpSession);
 
 // Find one LineItem
 LineItem lineItem = lineItemFinder.findById(123456l);
@@ -78,11 +88,14 @@ List<LineItem> lineItems = lineItemFinder.findByStatementBuilder(statementBuilde
 ### Find Orders
 
 ```java
-// Get the OrderService
+// Initialization of the Finder class if you cached the services
 OrderServiceInterface orderService =
     dfpServices.get(session, OrderServiceInterface.class);
 
 OrderFinder orderFinder = new OrderFinder(orderService);
+
+// Initialization of the Finder class with the utility service class of DFP
+OrderFinder orderFinder = new OrderFinder(dfpServices, dfpSession);
 
 // Find one Order
 Order order = orderFinder.findById(123456l);
@@ -99,11 +112,14 @@ List<Order> orders = orderFinder.findByStatementBuilder(statementBuilder);
 ### Find Placements
 
 ```java
-// Get the PlacementService
+// Initialization of the Finder class if you cached the services
 PlacementServiceInterface placementService =
     dfpServices.get(session, PlacementServiceInterface.class);
 
 PlacementFinder placementFinder = new PlacementFinder(placementService);
+
+// Initialization of the Finder class with the utility service class of DFP
+PlacementFinder placementFinder = new PlacementFinder(dfpServices, dfpSession);
 
 // Find one Placement
 Placement placement = placementFinder.findById(123456l);

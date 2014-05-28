@@ -8,11 +8,14 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
+import com.google.api.ads.dfp.axis.factory.DfpServices;
 import com.google.api.ads.dfp.axis.utils.v201403.StatementBuilder;
 import com.google.api.ads.dfp.axis.v201403.AdUnit;
 import com.google.api.ads.dfp.axis.v201403.AdUnitPage;
 import com.google.api.ads.dfp.axis.v201403.ApiException;
 import com.google.api.ads.dfp.axis.v201403.InventoryServiceInterface;
+import com.google.api.ads.dfp.axis.v201403.NetworkServiceInterface;
+import com.google.api.ads.dfp.lib.client.DfpSession;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -20,14 +23,46 @@ public class AdUnitFinder {
 
 	private final InventoryServiceInterface inventoryService;
 
-	public AdUnitFinder(final InventoryServiceInterface inventoryService) {
-		checkNotNull(inventoryService, "inventoryService should not be null");
-		this.inventoryService = inventoryService;
+	private final NetworkServiceInterface networkServiceInterface;
+
+	/**
+	 * Allows to construct the {@link AdUnitFinder} with {@link DfpServices} and
+	 * {@link DfpSession} which will extract the necessary services to use in
+	 * this class.
+	 * 
+	 * @param dfpServices
+	 * @param session
+	 */
+	public AdUnitFinder(final DfpServices dfpServices, final DfpSession session) {
+		this(dfpServices.get(session, InventoryServiceInterface.class), dfpServices.get(session, NetworkServiceInterface.class));
 	}
 
+	/**
+	 * Constructs the {@link AdUnitFinder} with an instance of
+	 * {@link InventoryServiceInterface} and {@link NetworkServiceInterface}.
+	 * 
+	 * The {@link NetworkServiceInterface} is necessary for example when we need
+	 * to find the effective root AdUnit.
+	 * 
+	 * @param inventoryService
+	 * @param networkServiceInterface
+	 */
+	public AdUnitFinder(final InventoryServiceInterface inventoryService,
+			final NetworkServiceInterface networkServiceInterface) {
+		checkNotNull(inventoryService, "inventoryService should not be null");
+		this.inventoryService = inventoryService;
+		this.networkServiceInterface = networkServiceInterface;
+	}
+
+	/**
+	 * @return The effective root {@link AdUnit} of the network
+	 */
 	public AdUnit findRoot() {
-		return Iterables.getOnlyElement(findByAdUnitStatementBuilder(new AdUnitStatementBuilderCreator().withParentId(null, StatementCondition.EQUAL)
-				.withStatusActive()));
+		try {
+			return findById(networkServiceInterface.getCurrentNetwork().getEffectiveRootAdUnitId());
+		} catch (Exception exception) {
+			throw new RuntimeException(exception);
+		}
 	}
 
 	public AdUnit findById(String id) {

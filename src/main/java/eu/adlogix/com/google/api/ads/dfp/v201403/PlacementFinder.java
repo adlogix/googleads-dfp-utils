@@ -8,11 +8,13 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
+import com.google.api.ads.dfp.axis.factory.DfpServices;
 import com.google.api.ads.dfp.axis.utils.v201403.StatementBuilder;
 import com.google.api.ads.dfp.axis.v201403.ApiException;
 import com.google.api.ads.dfp.axis.v201403.Placement;
 import com.google.api.ads.dfp.axis.v201403.PlacementPage;
 import com.google.api.ads.dfp.axis.v201403.PlacementServiceInterface;
+import com.google.api.ads.dfp.lib.client.DfpSession;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -20,6 +22,23 @@ public class PlacementFinder {
 
 	private final PlacementServiceInterface placementService;
 
+	/**
+	 * Allows to construct the {@link PlacementFinder} with {@link DfpServices}
+	 * and {@link DfpSession} which will extract the necessary services to use
+	 * in this class.
+	 * 
+	 * @param dfpServices
+	 * @param session
+	 */
+	public PlacementFinder(final DfpServices dfpServices, final DfpSession session) {
+		this(dfpServices.get(session, PlacementServiceInterface.class));
+	}
+
+	/**
+	 * Constructs the {@link PlacementFinder}
+	 * 
+	 * @param placementService
+	 */
 	public PlacementFinder(final PlacementServiceInterface placementService) {
 		checkNotNull(placementService);
 		this.placementService = placementService;

@@ -8,11 +8,13 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
+import com.google.api.ads.dfp.axis.factory.DfpServices;
 import com.google.api.ads.dfp.axis.utils.v201403.StatementBuilder;
 import com.google.api.ads.dfp.axis.v201403.ApiException;
 import com.google.api.ads.dfp.axis.v201403.LineItem;
 import com.google.api.ads.dfp.axis.v201403.LineItemPage;
 import com.google.api.ads.dfp.axis.v201403.LineItemServiceInterface;
+import com.google.api.ads.dfp.lib.client.DfpSession;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -20,6 +22,23 @@ public class LineItemFinder {
 
 	private final LineItemServiceInterface lineItemService;
 
+	/**
+	 * Allows to construct the {@link LineItemFinder} with {@link DfpServices}
+	 * and {@link DfpSession} which will extract the necessary services to use
+	 * in this class.
+	 * 
+	 * @param dfpServices
+	 * @param session
+	 */
+	public LineItemFinder(final DfpServices dfpServices, final DfpSession session) {
+		this(dfpServices.get(session, LineItemServiceInterface.class));
+	}
+
+	/**
+	 * Constructs the {@link LineItemFinder}
+	 * 
+	 * @param lineItemService
+	 */
 	public LineItemFinder(final LineItemServiceInterface lineItemService) {
 		checkNotNull(lineItemService);
 		this.lineItemService = lineItemService;
