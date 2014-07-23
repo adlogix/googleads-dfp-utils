@@ -1,4 +1,5 @@
-package eu.adlogix.com.google.api.ads.dfp.v201403;
+package eu.adlogix.com.google.api.ads.dfp;
+
 
 public enum AdUnitStatementQueryFilter implements StatementQueryFilter {
 

@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 
 import com.google.api.ads.dfp.axis.v201403.Statement;
 
+import eu.adlogix.com.google.api.ads.dfp.StatementCondition;
+
 public class AdUnitStatementBuilderCreatorTest {
 
 	@Test(dataProvider = "statementBuilderCreatorDataProvider")

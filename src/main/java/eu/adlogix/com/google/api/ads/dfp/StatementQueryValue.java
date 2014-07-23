@@ -1,9 +1,9 @@
-package eu.adlogix.com.google.api.ads.dfp.v201403;
+package eu.adlogix.com.google.api.ads.dfp;
 
 import lombok.Data;
 
 @Data
-class StatementQueryValue {
+public class StatementQueryValue {
 
 	private final Object object;
 
