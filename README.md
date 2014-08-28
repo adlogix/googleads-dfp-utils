@@ -15,7 +15,7 @@ You can use Maven by including the library:
 <dependency>
     <groupId>eu.adlogix.com.google.api.ads.dfp</groupId>
     <artifactId>googleads-dfp-utils</artifactId>
-    <version>0.0.6</version>
+    <version>0.0.7</version>
 </dependency>
 ```
 
