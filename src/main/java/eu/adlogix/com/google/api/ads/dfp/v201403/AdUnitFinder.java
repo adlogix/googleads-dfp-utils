@@ -27,6 +27,8 @@ public class AdUnitFinder {
 
 	private final NetworkServiceInterface networkServiceInterface;
 
+	private final int statementPageLimit;
+
 	/**
 	 * Allows to construct the {@link AdUnitFinder} with {@link DfpServices} and
 	 * {@link DfpSession} which will extract the necessary services to use in
@@ -51,9 +53,33 @@ public class AdUnitFinder {
 	 */
 	public AdUnitFinder(final InventoryServiceInterface inventoryService,
 			final NetworkServiceInterface networkServiceInterface) {
+		this(inventoryService, networkServiceInterface, StatementBuilder.SUGGESTED_PAGE_LIMIT);
+	}
+
+	/**
+	 * Constructs the {@link AdUnitFinder}
+	 * 
+	 * @param inventoryService
+	 * @param networkServiceInterface
+	 * @param statementPageLimit
+	 */
+	private AdUnitFinder(final InventoryServiceInterface inventoryService,
+			final NetworkServiceInterface networkServiceInterface, final int statementPageLimit) {
 		checkNotNull(inventoryService, "inventoryService should not be null");
 		this.inventoryService = inventoryService;
 		this.networkServiceInterface = networkServiceInterface;
+		this.statementPageLimit = statementPageLimit;
+	}
+
+	/**
+	 * Changes the {@link StatementBuilder} page limit
+	 * 
+	 * @param statementPageLimit
+	 *            The {@link StatementBuilder} page limit
+	 * @return
+	 */
+	public AdUnitFinder setStatementPageLimit(final int statementPageLimit) {
+		return new AdUnitFinder(inventoryService, networkServiceInterface, statementPageLimit);
 	}
 
 	/**
@@ -110,7 +136,7 @@ public class AdUnitFinder {
 
 	public List<AdUnit> findByStatementBuilder(StatementBuilder statementBuilder) {
 
-		statementBuilder.limit(StatementBuilder.SUGGESTED_PAGE_LIMIT);
+		statementBuilder.limit(statementPageLimit);
 
 		int totalResultSetSize = 0;
 
@@ -125,7 +151,7 @@ public class AdUnitFinder {
 					adUnits.addAll(Lists.newArrayList(page.getResults()));
 				}
 
-				statementBuilder.increaseOffsetBy(StatementBuilder.SUGGESTED_PAGE_LIMIT);
+				statementBuilder.increaseOffsetBy(statementPageLimit);
 			} while (statementBuilder.getOffset() < totalResultSetSize);
 
 		} catch (ApiException e) {
