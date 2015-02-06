@@ -159,5 +159,11 @@
 			<version>6.8.8</version>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+          <groupId>org.jooq</groupId>
+          <artifactId>joor</artifactId>
+          <version>0.9.4</version>
+        </dependency>
+    
 	</dependencies>
 </project>
