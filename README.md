@@ -25,17 +25,11 @@ You can use Maven by including the library:
 
 ```java
 
-// Initialization of the Finder class if you cached the services
-InventoryServiceInterface inventoryService =
-    dfpServices.get(session, InventoryServiceInterface.class);
-    
-NetworkServiceInterface networkService =
-	dfpServices.get(session, NetworkServiceInterface.class)
+// Initialization of the DfpFinderFactory class with the utility service class of DFP
+DfpFinderFactory dfpFinderFactory = new DfpFinderFactory(dfpServices, dfpSession);
 
-AdUnitFinder adUnitFinder = new AdUnitFinder(inventoryService, networkService);
-
-// Initialization of the Finder class with the utility service class of DFP
-AdUnitFinder adUnitFinder = new AdUnitFinder(dfpServices, dfpSession);
+//Get the AdUnitFinder from the dfpFinderFactory
+AdUnitFinder<AdUnit,StatementBuilder> adUnitFinder = dfpFinderFactory.getAdUnitFinder();
 
 // Find the Effective Root AdUnit
 AdUnit rootAdUnit = adUnitFinder.findRoot();
@@ -53,10 +47,15 @@ List<AdUnit> adUnits = adUnitFinder.findAllByParentId("123456");
 List<AdUnit> adUnits = adUnitFinder.findAll();
 
 // Custom
-StatementBuilder statementBuilder = new AdUnitStatementBuilderCreator()
-                .withStatus("ACTIVE", StatementCondition.EQUAL)
-                .withLastModifiedDateTime(new DateTime(), StatementCondition.GREATER_OR_EQUAL)
-                .toStatementBuilder();
+// Initialization of the DfpStatementBuilderCreatorFactory (This can be initialized once and reused)
+DfpStatementBuilderCreatorFactory statementBuilderCreatorFactory=new DfpStatementBuilderCreatorFactory();
+
+AdUnitStatementBuilderCreator<StatementBuilder> statementBuilderCreator = statementBuilderCreatorFactory.getAdUnitStatementBuilderCreator();
+
+StatementBuilder statementBuilder = statementBuilderCreator
+        .withStatus("ACTIVE", StatementCondition.EQUAL)
+        .withLastModifiedDateTime(new DateTime(), StatementCondition.GREATER_OR_EQUAL)
+        .toStatementBuilder();
 
 List<AdUnit> adUnits = adUnitFinder.findByStatementBuilder(statementBuilder);
 ```
@@ -64,20 +63,23 @@ List<AdUnit> adUnits = adUnitFinder.findByStatementBuilder(statementBuilder);
 ### Find LineItems
 
 ```java
-// Initialization of the Finder class if you cached the services
-LineItemServiceInterface lineItemService =
-    dfpServices.get(session, LineItemServiceInterface.class);
 
-LineItemFinder lineItemFinder = new LineItemFinder(lineItemService);
+// Initialization of the DfpFinderFactory class with the utility service class of DFP
+DfpFinderFactory dfpFinderFactory = new DfpFinderFactory(dfpServices, dfpSession);
 
-// Initialization of the Finder class with the utility service class of DFP
-LineItemFinder lineItemFinder = new LineItemFinder(dfpServices, dfpSession);
-
+//Get the LineItemFinder from the dfpFinderFactory
+LineItemFinder<LineItem, StatementBuilder> lineItemFinder = dfpFinderFactory.getLineItemFinder();
+		
 // Find one LineItem
 LineItem lineItem = lineItemFinder.findById(123456l);
 
 // Custom
-StatementBuilder statementBuilder = new LineItemStatementBuilderCreator()
+// Initialization of the DfpStatementBuilderCreatorFactory (This can be initialized once and reused)
+DfpStatementBuilderCreatorFactory statementBuilderCreatorFactory=new DfpStatementBuilderCreatorFactory();
+
+LineItemStatementBuilderCreator<StatementBuilder> statementBuilderCreator= statementBuilderCreatorFactory.getLineItemStatementBuilderCreator();
+
+StatementBuilder statementBuilder = statementBuilderCreator
                 .withId(123456l, StatementCondition.EQUAL)
                 .withLastModifiedDateTime(new DateTime(), StatementCondition.GREATER_OR_EQUAL)
                 .toStatementBuilder();
@@ -88,20 +90,23 @@ List<LineItem> lineItems = lineItemFinder.findByStatementBuilder(statementBuilde
 ### Find Orders
 
 ```java
-// Initialization of the Finder class if you cached the services
-OrderServiceInterface orderService =
-    dfpServices.get(session, OrderServiceInterface.class);
 
-OrderFinder orderFinder = new OrderFinder(orderService);
+// Initialization of the DfpFinderFactory class with the utility service class of DFP
+DfpFinderFactory dfpFinderFactory = new DfpFinderFactory(dfpServices, dfpSession);
 
-// Initialization of the Finder class with the utility service class of DFP
-OrderFinder orderFinder = new OrderFinder(dfpServices, dfpSession);
+//Get the OrderFinder from the dfpFinderFactory
+OrderFinder<Order,StatementBuilder> orderFinder = dfpFinderFactory.getOrderFinder();
 
 // Find one Order
 Order order = orderFinder.findById(123456l);
 
 // Custom
-StatementBuilder statementBuilder = new OrderStatementBuilderCreator()
+// Initialization of the DfpStatementBuilderCreatorFactory (This can be initialized once and reused)
+DfpStatementBuilderCreatorFactory statementBuilderCreatorFactory=new DfpStatementBuilderCreatorFactory();
+
+OrderStatementBuilderCreator<StatementBuilder> statementBuilderCreator= statementBuilderCreatorFactory.getOrderStatementBuilderCreator();
+
+StatementBuilder statementBuilder = statementBuilderCreator
                 .withId(123456l, StatementCondition.EQUAL)
                 .withLastModifiedDateTime(new DateTime(), StatementCondition.GREATER_OR_EQUAL)
                 .toStatementBuilder();
@@ -112,20 +117,24 @@ List<Order> orders = orderFinder.findByStatementBuilder(statementBuilder);
 ### Find Placements
 
 ```java
-// Initialization of the Finder class if you cached the services
-PlacementServiceInterface placementService =
-    dfpServices.get(session, PlacementServiceInterface.class);
 
-PlacementFinder placementFinder = new PlacementFinder(placementService);
+// Initialization of the DfpFinderFactory class with the utility service class of DFP
+DfpFinderFactory dfpFinderFactory = new DfpFinderFactory(dfpServices, dfpSession);
 
-// Initialization of the Finder class with the utility service class of DFP
-PlacementFinder placementFinder = new PlacementFinder(dfpServices, dfpSession);
+//Get the PlacementFinder from the dfpFinderFactory
+PlacementFinder<Placement, StatementBuilder> placementFinder= dfpFinderFactory.getPlacementFinder();
 
 // Find one Placement
 Placement placement = placementFinder.findById(123456l);
 
 // Custom
-StatementBuilder statementBuilder = new OrderStatementBuilderCreator()
+
+// Initialization of the DfpStatementBuilderCreatorFactory (This can be initialized once and reused)
+DfpStatementBuilderCreatorFactory statementBuilderCreatorFactory=new DfpStatementBuilderCreatorFactory();
+
+PlacementStatementBuilderCreator<StatementBuilder> statementBuilderCreator= statementBuilderCreatorFactory.getPlacementStatementBuilderCreator();
+
+StatementBuilder statementBuilder = statementBuilderCreator
                 .withId(123456l, StatementCondition.EQUAL)
                 .withLastModifiedDateTime(new DateTime(), StatementCondition.GREATER_OR_EQUAL)
                 .toStatementBuilder();
