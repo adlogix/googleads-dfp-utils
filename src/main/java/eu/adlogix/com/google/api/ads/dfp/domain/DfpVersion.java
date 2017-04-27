@@ -2,7 +2,7 @@ package eu.adlogix.com.google.api.ads.dfp.domain;
 
 public enum DfpVersion {
 
-	V_201505("v201505"), V_201511("v201511"), V_201605("v201605");
+	V_201608("v201608"), V_201611("v201611"), V_201702("v201702");
 
 	String versionName;
 
