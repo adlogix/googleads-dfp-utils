@@ -6,8 +6,8 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.google.api.ads.dfp.axis.utils.v201702.StatementBuilder;
-import com.google.api.ads.dfp.axis.v201702.Statement;
+import com.google.api.ads.dfp.axis.utils.v201708.StatementBuilder;
+import com.google.api.ads.dfp.axis.v201708.Statement;
 
 import eu.adlogix.com.google.api.ads.dfp.domain.DfpVersion;
 
@@ -34,15 +34,15 @@ public class AdUnitStatementBuilderCreatorTest {
 	}
 
 	private AdUnitStatementBuilderCreator<StatementBuilder> providerItem_withId_equal() {
-		return new AdUnitStatementBuilderCreator<StatementBuilder>(DfpVersion.V_201702).withId("test_id", StatementCondition.EQUAL);
+		return new AdUnitStatementBuilderCreator<StatementBuilder>(DfpVersion.V_201708).withId("test_id", StatementCondition.EQUAL);
 	}
 
 	private AdUnitStatementBuilderCreator<StatementBuilder> providerItem_withId_not_equal() {
-		return new AdUnitStatementBuilderCreator<StatementBuilder>(DfpVersion.V_201702).withId("test_id", StatementCondition.NOT_EQUAL);
+		return new AdUnitStatementBuilderCreator<StatementBuilder>(DfpVersion.V_201708).withId("test_id", StatementCondition.NOT_EQUAL);
 	}
 
 	private AdUnitStatementBuilderCreator<StatementBuilder> providerItem_withIds() {
-		return new AdUnitStatementBuilderCreator<StatementBuilder>(DfpVersion.V_201702).withIds(Arrays.asList(new String[] {
+		return new AdUnitStatementBuilderCreator<StatementBuilder>(DfpVersion.V_201708).withIds(Arrays.asList(new String[] {
 				"Hello", "World" }));
 	}
 }
