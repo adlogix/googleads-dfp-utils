@@ -1,6 +1,6 @@
-package eu.adlogix.com.google.api.ads.dfp.v201608;
+package eu.adlogix.com.google.api.ads.dfp.v201708;
 
-import com.google.api.ads.dfp.axis.utils.v201608.StatementBuilder;
+import com.google.api.ads.dfp.axis.utils.v201708.StatementBuilder;
 
 import eu.adlogix.com.google.api.ads.dfp.BaseStatementBuilderCreatorFactory;
 import eu.adlogix.com.google.api.ads.dfp.domain.DfpVersion;
@@ -8,7 +8,7 @@ import eu.adlogix.com.google.api.ads.dfp.domain.DfpVersion;
 public class DfpStatementBuilderCreatorFactory extends BaseStatementBuilderCreatorFactory<StatementBuilder> {
 
 	public DfpStatementBuilderCreatorFactory() {
-		super(DfpVersion.V_201608);
+		super(DfpVersion.V_201708);
 	}
 
 }

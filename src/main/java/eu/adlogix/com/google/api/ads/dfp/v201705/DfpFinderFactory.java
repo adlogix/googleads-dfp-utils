@@ -1,11 +1,11 @@
-package eu.adlogix.com.google.api.ads.dfp.v201611;
+package eu.adlogix.com.google.api.ads.dfp.v201705;
 
 import com.google.api.ads.dfp.axis.factory.DfpServices;
-import com.google.api.ads.dfp.axis.utils.v201611.StatementBuilder;
-import com.google.api.ads.dfp.axis.v201611.AdUnit;
-import com.google.api.ads.dfp.axis.v201611.LineItem;
-import com.google.api.ads.dfp.axis.v201611.Order;
-import com.google.api.ads.dfp.axis.v201611.Placement;
+import com.google.api.ads.dfp.axis.utils.v201705.StatementBuilder;
+import com.google.api.ads.dfp.axis.v201705.AdUnit;
+import com.google.api.ads.dfp.axis.v201705.LineItem;
+import com.google.api.ads.dfp.axis.v201705.Order;
+import com.google.api.ads.dfp.axis.v201705.Placement;
 import com.google.api.ads.dfp.lib.client.DfpSession;
 
 import eu.adlogix.com.google.api.ads.dfp.AdUnitFinder;
@@ -16,7 +16,7 @@ import eu.adlogix.com.google.api.ads.dfp.domain.DfpVersion;
 
 public class DfpFinderFactory {
 
-	private final DfpVersion VERSION = DfpVersion.V_201611;
+	private final DfpVersion VERSION = DfpVersion.V_201705;
 
 	private AdUnitFinder<AdUnit, StatementBuilder> adUnitFinder;
 
